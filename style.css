@@ -803,8 +803,8 @@ h1, h2, h3, h4, .slide-num, .box-header, .step-label {
     }
     
     .slide-content {
-        justify-content: flex-start;
-        padding-top: 3vh;
+        justify-content: center;
+        padding-top: 0;
     }
     
     .code-img-container {
