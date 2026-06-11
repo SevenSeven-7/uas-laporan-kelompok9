@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Presentasi Analisis Algoritma - Kelompok 9</title>
+    <!-- Clean Academic Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Holographic Cyber-Tech Background -->
+    <div class="tech-grid"></div>
+    <div class="scan-line"></div>
+    <div class="bg-glow glow-cyan"></div>
+    <div class="bg-glow glow-blue"></div>
+
+    <div class="presentation-container" id="presentation">
+        
+        <!-- SLIDE 1 -->
+        <div class="slide active" id="slide-1">
+            <div class="slide-content center-content">
+                <div class="tech-badge">MAHASISWA ILMU KOMPUTER</div>
+                <h1 class="title-tech">Analisis Kompleksitas Asimtotik dan Efisiensi Paradigma <span>Divide and Conquer</span> pada Algoritma Binary Search</h1>
+                <div class="divider"></div>
+                <h2 class="subtitle">Analisis Kompleksitas Algoritma (Materi Pertemuan 2)</h2>
+                
+                <div class="team-box tech-border">
+                    <div class="box-header">IDENTITAS KELOMPOK 9</div>
+                    <div class="team-grid">
+                        <div class="team-member">01 // SYAMSUL ARIFIN</div>
+                        <div class="team-member">02 // MOH. OFIKURRAHMAN</div>
+                        <div class="team-member">03 // SHOFYAN IBNU GAZALI</div>
+                    </div>
+                </div>
+                <div class="footer-note mt-2">
+                    [ Laporan Ujian Akhir Semester (UAS) – Mata Kuliah Analisis Algoritma ]
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide" id="slide-2">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">02</span>
+                    <h2>Pendahuluan: <span class="highlight">Latar Belakang</span></h2>
+                </div>
+                <ul class="tech-list vertical-center">
+                    <li>Pertumbuhan volume data secara eksponensial di era komputasi modern.</li>
+                    <li><strong>Tuntutan sistem:</strong> Kecepatan eksekusi instruksi dalam waktu optimal.</li>
+                    <li><strong>Keterbatasan hardware:</strong> Efisiensi tidak lagi hanya bergantung pada spesifikasi perangkat keras.</li>
+                    <li>Peran krusial desain algoritma dan struktur data terhadap performa sistem.</li>
+                    <li class="highlight-list">Operasi pencarian (<em>searching</em>) sebagai fondasi utama berbagai sistem informasi.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide" id="slide-3">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">03</span>
+                    <h2>Identifikasi <span class="highlight">Masalah</span></h2>
+                </div>
+                <div class="cards-container vertical-center">
+                    <div class="tech-card">
+                        <div class="card-icon">[ ! ]</div>
+                        <p>Kurangnya pemahaman mengenai pengukuran efisiensi algoritma secara objektif (tanpa bias kecepatan prosesor).</p>
+                    </div>
+                    <div class="tech-card alert-card">
+                        <div class="card-icon">[ x ]</div>
+                        <p>Ketidakrelevanan pencarian sekuensial (<em>Linear Search</em>) pada himpunan data berskala masif.</p>
+                    </div>
+                    <div class="tech-card success-card">
+                        <div class="card-icon">[ > ]</div>
+                        <p>Pentingnya pembuktian sistematis mengenai reduksi waktu komputasi secara logaritmik pada <em>Binary Search</em>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide" id="slide-4">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">04</span>
+                    <h2>Rumusan Masalah & <span class="highlight">Tujuan</span></h2>
+                </div>
+                <div class="split-layout vertical-center">
+                    <div class="text-block">
+                        <h3 class="highlight-cyan">> RUMUSAN MASALAH</h3>
+                        <ol class="tech-ordered-list">
+                            <li>Bagaimana mekanisme <em>tracing</em> batas ruang pencarian pada <em>Binary Search</em>?</li>
+                            <li>Bagaimana pembuktian matematis kompleksitas waktu <em>worst-case</em> <span class="math-expr">O(log n)</span>?</li>
+                            <li>Apa implikasi alokasi memori internal terhadap kompleksitas ruangnya?</li>
+                        </ol>
+                    </div>
+                    <div class="text-block success-block">
+                        <h3 class="highlight-green">> TUJUAN PENULISAN</h3>
+                        <ol class="tech-ordered-list">
+                            <li>Memenuhi syarat kelulusan UAS Analisis Algoritma.</li>
+                            <li>Mendemonstrasikan pemahaman Notasi Asimtotik.</li>
+                            <li>Menyajikan dokumentasi dari penelusuran manual hingga implementasi riil.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5 -->
+        <div class="slide" id="slide-5">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">05</span>
+                    <h2>Analisis <span class="highlight">Kompleksitas Asimtotik</span></h2>
+                </div>
+                <div class="theory-box mb-2">
+                    <strong>Definisi:</strong> Metode evaluasi laju pertumbuhan fungsi (<em>growth rate</em>) waktu atau memori seiring bertambahnya input (<span class="math-expr">n</span>).
+                </div>
+                <h3 class="sub-header">> Tiga Notasi Utama:</h3>
+                <div class="notation-grid vertical-center">
+                    <div class="tech-card">
+                        <div class="notation-symbol">O</div>
+                        <h4>Big-O</h4>
+                        <p class="highlight-red">Batas atas (upper bound)</p>
+                        <p>Kasus Terburuk (Worst-case)</p>
+                    </div>
+                    <div class="tech-card">
+                        <div class="notation-symbol">&Omega;</div>
+                        <h4>Big-Omega</h4>
+                        <p class="highlight-green">Batas bawah (lower bound)</p>
+                        <p>Kasus Terbaik (Best-case)</p>
+                    </div>
+                    <div class="tech-card">
+                        <div class="notation-symbol">&Theta;</div>
+                        <h4>Big-Theta</h4>
+                        <p class="highlight-blue">Batas ketat (tight bound)</p>
+                        <p>Kasus Rata-rata (Average-case)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6 -->
+        <div class="slide" id="slide-6">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">06</span>
+                    <h2>Paradigma <span class="highlight">Divide and Conquer</span></h2>
+                </div>
+                <div class="theory-box mb-2">
+                    <strong>Prinsip Utama:</strong> Memecah masalah besar menjadi sub-masalah kecil yang serupa.
+                </div>
+                <div class="process-flow vertical-center">
+                    <div class="process-step tech-border">
+                        <div class="step-label">TAHAP 1</div>
+                        <h3 class="highlight-cyan">DIVIDE</h3>
+                        <p>Memecah masalah asli menjadi bagian-bagian kecil.</p>
+                    </div>
+                    <div class="process-arrow">>></div>
+                    <div class="process-step tech-border">
+                        <div class="step-label">TAHAP 2</div>
+                        <h3 class="highlight-cyan">CONQUER</h3>
+                        <p>Menyelesaikan tiap bagian secara independen.</p>
+                    </div>
+                    <div class="process-arrow">>></div>
+                    <div class="process-step tech-border">
+                        <div class="step-label">TAHAP 3</div>
+                        <h3 class="highlight-cyan">COMBINE</h3>
+                        <p>Menggabungkan solusi (Opsional pada <em>Binary Search</em>).</p>
+                    </div>
+                </div>
+                <div class="footer-note mt-2 text-center">
+                    <strong>Karakteristik pada Pencarian:</strong> Digunakan untuk mengeleminasi elemen data yang tidak relevan sejak awal proses.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7 -->
+        <div class="slide" id="slide-7">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">07</span>
+                    <h2>Algoritma <span class="highlight">Binary Search</span></h2>
+                </div>
+                <div class="warning-box mb-2">
+                    <span class="alert-icon">[ ! ]</span>
+                    <strong>Aturan Mutlak:</strong> Data harus dalam kondisi terurut (<em>sorted</em>).
+                </div>
+                <h3 class="sub-header">> Cara Kerja:</h3>
+                <div class="workflow-steps vertical-center">
+                    <div class="w-step tech-border"><span>1.</span> Menentukan titik tengah (<em>mid</em>).</div>
+                    <div class="w-step tech-border"><span>2.</span> Membandingkan <em>mid</em> dengan target.</div>
+                    <div class="w-step tech-border"><span>3.</span> Mengeliminasi setengah bagian array yang tidak mungkin memuat target.</div>
+                    <div class="w-step tech-border"><span>4.</span> Pencarian dilanjutkan pada paruh yang tersisa secara berulang.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8 -->
+        <div class="slide" id="slide-8">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">08</span>
+                    <h2>Metodologi: <span class="highlight">Studi Kasus</span></h2>
+                </div>
+                <div class="data-spec-container vertical-center">
+                    <div class="spec-info tech-border">
+                        <p><strong>Karakteristik Data:</strong> Array Integer, Terurut <em>Ascending</em>.</p>
+                        <p><strong>Ukuran Input (n):</strong> 10 Elemen (Indeks 0-9).</p>
+                        <p class="mt-2 text-xl"><strong>Nilai Target yang Dicari:</strong> <span class="highlight-green text-bold blink">57</span></p>
+                    </div>
+                    <div class="array-visual-wrapper">
+                        <h3 class="mb-1 text-center">> Dataset:</h3>
+                        <div class="array-visual">
+                            <div class="arr-item">5</div>
+                            <div class="arr-item">12</div>
+                            <div class="arr-item">18</div>
+                            <div class="arr-item">23</div>
+                            <div class="arr-item">35</div>
+                            <div class="arr-item">44</div>
+                            <div class="arr-item target-item">57</div>
+                            <div class="arr-item">62</div>
+                            <div class="arr-item">78</div>
+                            <div class="arr-item">89</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9 -->
+        <div class="slide" id="slide-9">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">09</span>
+                    <h2>Kondisi Batas dan <span class="highlight">Variabel Pointer</span></h2>
+                </div>
+                <h3 class="sub-header">> Variabel Penunjuk Utama:</h3>
+                <div class="pointers-grid vertical-center">
+                    <div class="pointer-card tech-border">
+                        <div class="p-tag p-low">low</div>
+                        <p>Indeks batas bawah rentang aktif.</p>
+                    </div>
+                    <div class="pointer-card tech-border">
+                        <div class="p-tag p-mid">mid</div>
+                        <p>Titik tengah rentang.</p>
+                        <div class="math-box mt-1">mid = &lfloor;(low + high) / 2&rfloor;</div>
+                    </div>
+                    <div class="pointer-card tech-border">
+                        <div class="p-tag p-high">high</div>
+                        <p>Indeks batas atas rentang aktif.</p>
+                    </div>
+                </div>
+                <div class="footer-note mt-2 text-center highlight-red">
+                    <strong>Kondisi Berhenti:</strong> Pencarian berakhir jika target ditemukan atau <code>low > high</code>.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10 -->
+        <div class="slide" id="slide-10">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">10</span>
+                    <h2>Tracing Pencarian <span class="highlight">(Iterasi 1 - 2)</span></h2>
+                </div>
+                <div class="tracing-grid vertical-center">
+                    <div class="trace-box tech-border">
+                        <div class="box-header">ITERASI 1</div>
+                        <ul class="tech-list">
+                            <li><span class="code-text">low=0</span>, <span class="code-text">high=9</span>, <span class="highlight-cyan code-text">mid=4</span>.</li>
+                            <li>Nilai <span class="code-text">Array[4]=35</span>.</li>
+                            <li class="eval-line"><strong>Evaluasi:</strong> 57 > 35. Target di paruh kanan.</li>
+                            <li class="result-line"><code>low</code> naik menjadi <strong class="highlight-cyan">5</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="trace-box tech-border">
+                        <div class="box-header">ITERASI 2</div>
+                        <ul class="tech-list">
+                            <li><span class="code-text">low=5</span>, <span class="code-text">high=9</span>, <span class="highlight-cyan code-text">mid=7</span>.</li>
+                            <li>Nilai <span class="code-text">Array[7]=62</span>.</li>
+                            <li class="eval-line"><strong>Evaluasi:</strong> 57 < 62. Target di paruh kiri.</li>
+                            <li class="result-line"><code>high</code> turun menjadi <strong class="highlight-cyan">6</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11 -->
+        <div class="slide" id="slide-11">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">11</span>
+                    <h2>Tracing Pencarian <span class="highlight">(Iterasi 3 - 4)</span></h2>
+                </div>
+                <div class="tracing-grid vertical-center">
+                    <div class="trace-box tech-border">
+                        <div class="box-header">ITERASI 3</div>
+                        <ul class="tech-list">
+                            <li><span class="code-text">low=5</span>, <span class="code-text">high=6</span>, <span class="highlight-cyan code-text">mid=5</span>.</li>
+                            <li>Nilai <span class="code-text">Array[5]=44</span>.</li>
+                            <li class="eval-line"><strong>Evaluasi:</strong> 57 > 44. Target di paruh kanan.</li>
+                            <li class="result-line"><code>low</code> naik menjadi <strong class="highlight-cyan">6</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="trace-box success-card tech-border">
+                        <div class="box-header success-header">ITERASI 4</div>
+                        <ul class="tech-list">
+                            <li><span class="code-text">low=6</span>, <span class="code-text">high=6</span>, <span class="highlight-cyan code-text">mid=6</span>.</li>
+                            <li>Nilai <span class="code-text">Array[6]=57</span>.</li>
+                            <li class="eval-line"><strong>Evaluasi:</strong> 57 == 57.</li>
+                            <li class="result-line highlight-green text-bold text-xl blink">> TARGET DITEMUKAN!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12 -->
+        <div class="slide" id="slide-12">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">12</span>
+                    <h2>Linear Search <span class="highlight">vs. Binary Search</span></h2>
+                </div>
+                <h3 class="sub-header text-center">> Hasil Studi Kasus (n=10)</h3>
+                <div class="compare-container vertical-center">
+                    <div class="compare-box tech-border alert-card">
+                        <h3>LINEAR SEARCH</h3>
+                        <div class="big-number">7x</div>
+                        <p>Pengecekan (sekuensial)</p>
+                    </div>
+                    <div class="compare-box tech-border success-card">
+                        <h3>BINARY SEARCH</h3>
+                        <div class="big-number">4x</div>
+                        <p>Iterasi (logaritmik)</p>
+                    </div>
+                </div>
+                <div class="theory-box mt-2 text-center">
+                    <strong>Analisis:</strong> Binary Search mampu mengunci target secara presisi dengan jumlah operasi yang jauh lebih sedikit melalui pembagian rentang secara konsisten.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13 -->
+        <div class="slide" id="slide-13">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">13</span>
+                    <h2>Pembuktian Kompleksitas <span class="highlight">Waktu O(log n)</span></h2>
+                </div>
+                <div class="math-flow vertical-center">
+                    <div class="m-step text-center">
+                        <p>Penyusutan data per tahap:</p>
+                        <span class="math-expr">n, n/2, n/4, ..., n/2<sup>k</sup></span>
+                    </div>
+                    
+                    <div class="math-derivation tech-border">
+                        <p>Kondisi Terburuk (<em>Worst-case</em>) saat sisa data = 1:</p>
+                        <div class="big-math">n / 2<sup>k</sup> = 1  &nbsp;&rarr;&nbsp;  n = 2<sup>k</sup></div>
+                        
+                        <p class="mt-1">Aplikasi Logaritma Basis 2:</p>
+                        <div class="big-math">log<sub>2</sub> n = log<sub>2</sub> (2<sup>k</sup>)  &nbsp;&rarr;&nbsp;  k = log<sub>2</sub> n</div>
+                    </div>
+                    
+                    <div class="final-complexity text-center">
+                        <strong>Kesimpulan:</strong> Kompleksitas waktu adalah <span class="highlight-green text-bold">O(log n)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 14 -->
+        <div class="slide" id="slide-14">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">14</span>
+                    <h2>Analisis Kompleksitas <span class="highlight">Ruang (Space Complexity)</span></h2>
+                </div>
+                <ul class="tech-list vertical-center mb-2">
+                    <li>Implementasi iteratif tidak menduplikasi array input ke memori baru.</li>
+                    <li>Hanya memanipulasi variabel primitif integer (<code>low</code>, <code>high</code>, <code>mid</code>).</li>
+                    <li>Alokasi memori bersifat statis/tetap tanpa terpengaruh lonjakan jumlah data <span class="math-expr">n</span>.</li>
+                </ul>
+                <div class="final-complexity text-center">
+                    <strong>Kesimpulan:</strong> Kompleksitas ruang bersifat konstan atau <span class="highlight-cyan text-bold">O(1)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 15 -->
+        <div class="slide" id="slide-15">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">15</span>
+                    <h2>Implementasi <span class="highlight">Kode Python</span></h2>
+                </div>
+                <div class="code-split vertical-center">
+                    <div class="code-img-container tech-border">
+                        <div class="box-header">BINARY_SEARCH.PY</div>
+                        <img src="carbon (1).png" alt="Code Binary Search" class="code-image">
+                    </div>
+                    <div class="explanation-box">
+                        <h3 class="highlight-cyan">> Penjelasan Fungsi:</h3>
+                        <ul class="tech-list small-text">
+                            <li>Menerima parameter <code>array_terurut</code> dan <code>nilai_target</code>.</li>
+                            <li>Logika perulangan <code>while</code> untuk validasi batas.</li>
+                            <li>Penentuan titik tengah (<code>mid</code>) sebagai pusat evaluasi.</li>
+                            <li>Mekanisme pergeseran pointer untuk eliminasi paruh array.</li>
+                            <li>Pengembalian nilai <code>-1</code> jika target nihil.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 16 -->
+        <div class="slide" id="slide-16">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-num">16</span>
+                    <h2>Kesimpulan <span class="highlight">Akhir</span></h2>
+                </div>
+                <div class="conclusion-grid vertical-center">
+                    <div class="tech-card">
+                        <p><em>Binary Search</em> adalah instrumen superior untuk data berskala masif dengan syarat data terurut.</p>
+                    </div>
+                    <div class="tech-card">
+                        <p>Paradigma <em>Divide and Conquer</em> mereduksi kompleksitas waktu secara drastis dari linear <span class="highlight-red">O(n)</span> menjadi logaritmik <span class="highlight-green">O(log n)</span>.</p>
+                    </div>
+                    <div class="tech-card">
+                        <p>Efisiensi terbukti dari perbandingan <strong>4 iterasi (Binary)</strong> vs <strong>7 pengecekan (Linear)</strong> pada kasus nyata.</p>
+                    </div>
+                    <div class="tech-card">
+                        <p>Penggunaan memori sangat hemat (konstan <span class="highlight-cyan">O(1)</span>) karena hanya memanipulasi pointer indeks.</p>
+                    </div>
+                    <div class="tech-card full-width success-card text-center">
+                        <p><strong>Optimalisasi algoritma jauh lebih krusial daripada sekadar meningkatkan kapasitas hardware.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 17 -->
+        <div class="slide" id="slide-17">
+            <div class="slide-content center-content">
+                <div class="closing-hologram">
+                    <h1 class="title-tech blink">SEKIAN DAN TERIMA KASIH</h1>
+                    <div class="divider"></div>
+                    <h2 class="highlight-cyan mt-1">> Sesi Tanya Jawab (Questions & Answers) <</h2>
+                </div>
+                
+                <div class="footer-block tech-border mt-2">
+                    <p class="highlight-blue">Kelompok 9</p>
+                    <p class="small-text">Syamsul Arifin | Moh. Ofikurrahman | Shofyan Ibnu Gazali</p>
+                    <p class="small-text mt-1 opacity-70">Mata Kuliah Analisis Algoritma &mdash; UAS 2026</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Tech Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
