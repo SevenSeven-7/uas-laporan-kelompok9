@@ -332,18 +332,6 @@ h1, h2, h3, h4, .slide-num, .box-header, .step-label {
 }
 
 @media (max-width: 768px) {
-    .code-img-container {
-        border-radius: 8px;
-    }
-
-    .code-image {
-        max-height: 35vh;
-    }
-    
-    .tech-card, .text-block, .process-step, .w-step, .trace-box, .compare-box {
-        min-width: 100%;
-    }
-    
     /* Hide Progress Bar on Mobile */
     .progress-container {
         display: none !important;
