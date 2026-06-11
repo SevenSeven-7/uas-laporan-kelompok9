@@ -355,6 +355,12 @@ h1, h2, h3, h4, .slide-num, .box-header, .step-label {
     font-weight: bold;
 }
 
+/* Margin Utilities */
+.mt-1 { margin-top: 12px !important; }
+.mt-2 { margin-top: 24px !important; }
+.mb-1 { margin-bottom: 12px !important; }
+.mb-2 { margin-bottom: 24px !important; }
+
 /* Specific Slides */
 .notation-grid {
     display: flex;
@@ -571,7 +577,7 @@ h1, h2, h3, h4, .slide-num, .box-header, .step-label {
 .math-flow {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 20px;
     align-items: center;
 }
 
@@ -583,22 +589,22 @@ h1, h2, h3, h4, .slide-num, .box-header, .step-label {
 
 .big-math {
     font-family: 'Fira Code', monospace;
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 700;
     color: var(--heading-color);
     background: var(--card-bg);
-    padding: 24px 40px;
+    padding: 16px 32px;
     border-radius: 12px;
     border: 2px solid var(--border-color);
-    margin: 24px auto;
+    margin: 16px auto;
     display: inline-block;
     box-shadow: var(--shadow-sm);
 }
 
 .final-complexity {
-    font-size: 32px;
+    font-size: 28px;
     background: #dcfce7;
-    padding: 24px;
+    padding: 20px;
     border: 2px solid var(--success);
     color: var(--heading-color);
     border-radius: 12px;
