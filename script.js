@@ -71,4 +71,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize first slide
     updateSlides();
+
+    // Scale presentation to fit any screen (True Responsive Landscape)
+    function resizePresentation() {
+        const container = document.getElementById('presentation');
+        if (!container) return;
+        
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        
+        // Base presentation size (16:9 ratio)
+        const baseWidth = 1280;
+        const baseHeight = 720;
+        
+        // Calculate scale to fit both width and height perfectly without overflowing
+        const scaleX = windowWidth / baseWidth;
+        const scaleY = windowHeight / baseHeight;
+        
+        // Use the smallest scale to ensure it fits entirely inside the screen
+        const scale = Math.min(scaleX, scaleY) * 0.98; // 0.98 gives a tiny 1% margin on edges
+        
+        container.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+
+    // Run on load and whenever window resizes
+    window.addEventListener('resize', resizePresentation);
+    resizePresentation();
 });
