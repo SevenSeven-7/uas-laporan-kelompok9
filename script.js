@@ -97,4 +97,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Run on load and whenever window resizes
     window.addEventListener('resize', resizePresentation);
     resizePresentation();
+
+    // Fullscreen and Rotate Logic for Mobile
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', async () => {
+            try {
+                if (!document.fullscreenElement) {
+                    await document.documentElement.requestFullscreen();
+                    // Try to lock to landscape if supported
+                    if (screen.orientation && screen.orientation.lock) {
+                        await screen.orientation.lock('landscape');
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        await document.exitFullscreen();
+                    }
+                }
+            } catch (err) {
+                console.error("Fullscreen/Orientation lock failed:", err);
+            }
+        });
+    }
 });
