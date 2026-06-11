@@ -666,24 +666,6 @@ h1, h2, h3, h4, .slide-num, .box-header, .step-label {
 
 .opacity-70 { color: #64748b; }
 
-/* PROGRESS BAR */
-.progress-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 8px;
-    background: #e2e8f0;
-    z-index: 1000;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: var(--accent-primary);
-    transition: width 0.3s ease;
-}
-
 /* FULLSCREEN ROTATE BUTTON */
 .fullscreen-btn {
     position: fixed;

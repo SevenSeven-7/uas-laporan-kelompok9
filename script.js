@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelectorAll('.slide');
-    const progressBar = document.getElementById('progressBar');
     
     let currentSlide = 0;
     const totalSlides = slides.length;
@@ -13,10 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 slide.classList.remove('active');
             }
         });
-        
-        // Update Progress Bar
-        const progress = ((currentSlide + 1) / totalSlides) * 100;
-        progressBar.style.width = `${progress}%`;
     }
 
     function goToNextSlide() {
