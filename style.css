@@ -346,12 +346,7 @@ h1, h2, h3, h4, .slide-num, .box-header, .step-label {
     
     /* Hide Progress Bar on Mobile */
     .progress-container {
-        display: none;
-    }
-    
-    /* Show Fullscreen Button on Mobile */
-    .fullscreen-btn {
-        display: flex;
+        display: none !important;
     }
 }
 
@@ -714,12 +709,18 @@ h1, h2, h3, h4, .slide-num, .box-header, .step-label {
     font-size: 32px;
     border: 3px solid white;
     box-shadow: var(--shadow-lg);
-    display: none; /* Hidden by default (desktop) */
+    display: none; /* Hidden by default */
     justify-content: center;
     align-items: center;
     z-index: 2000;
     cursor: pointer;
     transition: transform 0.2s ease, background 0.2s ease;
+}
+
+@media (max-width: 1024px), (pointer: coarse) {
+    .fullscreen-btn {
+        display: flex !important;
+    }
 }
 
 .fullscreen-btn:active {
